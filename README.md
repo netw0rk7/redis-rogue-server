@@ -15,7 +15,7 @@ Modified to support for **Red Team operators, CVE research, exploit labs, and co
 ## Features
 
 - Rogue Redis replication server (PSYNC/SYNC handler)
-- Supports modules injection via `<payload.so>`  [RedisModules-ExecuteCommand (fixed module.c error)](https://github.com/netw0rk7/RedisModules-ExecuteCommand) 
+- Supports modules injection via `<exp.so>`  [RedisModules-ExecuteCommand (fixed module.c error)](https://github.com/netw0rk7/RedisModules-ExecuteCommand) 
 - Works with reverse tunnels (Pinggy, Cloudflare, Ngrok)
 - Configurable **local bind port** (`--bind`)
 - Interactive shell (`system.exec`)
